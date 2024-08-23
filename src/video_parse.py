@@ -9,13 +9,15 @@
 import cv2 
 import numpy
 
-def video_parse(file, path, rate):
+def video_parse(video_file, save_path, rate):
+
+    #need to save video into folder location as well
 
     #need to validate path is correct?
     #need to ensure frame rate is a realistic time interval. 
 
     #open video file
-    video = cv2.VideoCapture(file)
+    video = cv2.VideoCapture(video_file)
 
     #set initial frame count
     frame_name = 0
@@ -31,10 +33,9 @@ def video_parse(file, path, rate):
 
         if frame_count % rate == 0:
             filename = str(frame_name)
-            save_file = (path + "/" + filename + ".jpg")
+            save_file = (save_path + "/" + filename + ".jpg")
             cv2.imwrite(save_file, frame)
             frame_name+=1
-            break
         else:
             frame_count+=1
 

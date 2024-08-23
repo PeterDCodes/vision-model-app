@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+
+    <div class="col-sm-8 text-left"> 
+      <h1>CV Model Training Portal</h1>
+      <p>Webpage to automate and streamline process of training a custom YoloV8 computer vision model using tensorflow.</p>
+      <hr>
+      <h3>Create New Model</h3>
+      <div>
+        <form action="/submit-project" method="POST" enctype="multipart/form-data">
+            <label for="project_name">Project Name:</label>
+            <input type="text" id="project_name" name="project_name" required><br><br>
+            <label for="object_name">Object Name:</label>
+            <input type="text" id="object_name" name="object_name" ><br><br>
+            <label for="file">Select Video File:</label>
+            <input type="file" name = 'file' accept=".mp4,.mov" ><br>
+            <label for="rate">Parse Rate:</label>
+            <input type="number" id="rate" name="rate" min="1" max="10" value="1">  EX: Parse Rate of "1" will result in 1 .jpg file for each 1 second of video.<br><br>
+            <input type="submit" value="Start">
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
