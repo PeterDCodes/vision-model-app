@@ -11,8 +11,14 @@
       <h3> project_name #fix this using jinja </h3>
       <div>
         <form action="/">
-            add current image here<br><br>
-            
+              <section class="row">
+                {% for image in images %}
+                <div>
+                  <img src="{{ '/' + project_name + '/dataset/images/train/' + image }}" alt="{{ image }}" style="width:1000px;height:1000;">
+                  <p>{{ image }}</p>
+                </div>
+                {% endfor %}
+              </section>
             <input type="submit" value="Start">
           </form>
       </div>
