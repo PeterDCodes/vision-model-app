@@ -62,15 +62,18 @@ def submit_project():
 @app.route("/annotate")
 def view_images():
         image_path = session['image_path']
-        print(image_path)
         images = os.listdir(image_path)  
-        print(images)
       
-        return render_template("annotate.html", images=images, project_name = session['project_name'])
+        return render_template("annotate.html", image=images[session['image_number']], project_name = session['project_name'])
 
 
 @app.route('/<project_name>/dataset/images/train/<filename>')
 def serve_image(project_name, filename):
     directory = os.path.join('.', project_name, 'dataset', 'images', 'train')
     return send_from_directory(directory, filename)
-    
+
+@app.route('/next-image')
+def next_image():
+     #moves image to be displayed in annotate up one image in directory
+     session['image_number'] =+ 1
+     return redirect("/annotate")
