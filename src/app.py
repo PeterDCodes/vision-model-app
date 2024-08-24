@@ -82,3 +82,9 @@ def next_image():
      #moves image to be displayed in annotate up one image in directory
      session['image_number'] += 1
      return redirect("/annotate")
+
+@app.route('/previous-image')
+def previous_image():
+     #moves image to be displayed in annotate up one image in directory
+     session['image_number'] += 1
+     return redirect("/annotate")

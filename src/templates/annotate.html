@@ -1,24 +1,33 @@
 {% extends "base.html" %}
 
-{% block content%}
+{% block content %}
   
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-8 text-left">
-      <h1>Training Image Annotation Portal</h1>
-      <p>Complete image annotation using the below interface. All annotations will be converted into .txt coordinate file.</p>
-      <hr>
-      <h3> Project Name: {{ project_name }}  <br> Image: {{ image }}</h3>
-      <div class="container-fluid">
-        <form action="/next-image">
-              <section class="row">
-                <div column>
-                  <img class="img-responsive" src="{{ '/' + project_name + '/dataset/images/train/' + image }}" alt="{{ image }}" style="width:200px;height:200;">
-                  <p>{{ image }}</p>
-                </div>
-              </section>
-            <input type="submit" value="Next Image">
-          </form>
+<div>
+  <div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-8 text-left">
+        <h1>Training Image Annotation Portal</h1>
+        <p>Complete image annotation using the interface below. All annotations will be converted into a .txt coordinate file.</p>
+        <h3>Project Name: {{ project_name }} Image: {{ image }}</h3>
+        <hr>
+
+        <!-- Main content area -->
+        <div class="col-sm-7">
+          <img class="img-responsive" src="{{ '/' + project_name + '/dataset/images/train/' + image }}" alt="{{ image }}" style="width:200px;height:200px;">
+        </div>
+
+        <!-- Navigation buttons on the same level -->
+        <div class="col-sm-5">
+          <div class="btn-group" role="group">
+            <form action="/previous-image"  style="display: inline;">
+              <button type="submit" class="btn btn-primary">Back</button>
+            </form>
+            <form action="/next-image"  style="display: inline;">
+              <button type="submit" class="btn btn-primary">Next</button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
