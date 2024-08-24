@@ -6,20 +6,18 @@
   <div class="row content">
     <div class="col-sm-8 text-left">
       <h1>Training Image Annotation Portal</h1>
-      <p>Complete immage annotation using the below interface. All annotations will be converted into .txt coordinate file.</p>
+      <p>Complete image annotation using the below interface. All annotations will be converted into .txt coordinate file.</p>
       <hr>
-      <h3> project_name #fix this using jinja </h3>
-      <div>
-        <form action="/">
+      <h3> Project Name: {{ project_name }}  <br> Image: {{ image }}</h3>
+      <div class="container-fluid">
+        <form action="/next-image">
               <section class="row">
-                {% for image in images %}
-                <div>
-                  <img src="{{ '/' + project_name + '/dataset/images/train/' + image }}" alt="{{ image }}" style="width:1000px;height:1000;">
+                <div column>
+                  <img class="img-responsive" src="{{ '/' + project_name + '/dataset/images/train/' + image }}" alt="{{ image }}" style="width:200px;height:200;">
                   <p>{{ image }}</p>
                 </div>
-                {% endfor %}
               </section>
-            <input type="submit" value="Start">
+            <input type="submit" value="Next Image">
           </form>
       </div>
     </div>

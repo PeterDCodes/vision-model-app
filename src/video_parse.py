@@ -36,6 +36,8 @@ def video_parse(video_file, save_path, rate):
             save_file = (save_path + "/" + filename + ".jpg")
             cv2.imwrite(save_file, frame)
             frame_name+=1
+                
+                
         else:
             frame_count+=1
 

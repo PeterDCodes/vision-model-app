@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, render_template, session, send_from_
 from config_files import config_files
 import os
 from video_parse import video_parse
+from image_dir_sort import image_dir_sort
 
 
 #video parse is an imported function. I need to figure out how I can get vid from user and parse into folders.
@@ -51,6 +52,8 @@ def submit_project():
         #need to put in the video path
         video_parse(video_file_name, image_path, rate)
 
+        #set 0 image to display as first image in directory
+        session['image_number'] = 0
 
         #need to add a FileExistsError so two project of the same name cant be submitted
         return redirect("/annotate")
@@ -62,15 +65,20 @@ def submit_project():
 @app.route("/annotate")
 def view_images():
         image_path = session['image_path']
-        print(image_path)
-        images = os.listdir(image_path)  
-        print(images)
-      
-        return render_template("annotate.html", images=images, project_name = session['project_name'])
+        images = image_dir_sort((os.listdir(image_path))) #sorted retrun values of directory in sorted order from helper function.
+
+        current_image = session['image_number']
+
+        return render_template("annotate.html", image=images[current_image], project_name = session['project_name'])
 
 
 @app.route('/<project_name>/dataset/images/train/<filename>')
 def serve_image(project_name, filename):
     directory = os.path.join('.', project_name, 'dataset', 'images', 'train')
     return send_from_directory(directory, filename)
-    
+
+@app.route('/next-image')
+def next_image():
+     #moves image to be displayed in annotate up one image in directory
+     session['image_number'] += 1
+     return redirect("/annotate")
