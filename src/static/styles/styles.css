@@ -1,0 +1,156 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .outsideWrapper {
+    position: relative;
+    width: 80%;
+    height: auto;
+    max-width: 100%;
+    border: 1px solid blue;
+  }
+  
+  .insideWrapper {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .coordinatesDisplay {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .coordinatesDisplay h3 {
+    margin-top: 0;
+  }
+  
+  
+  .top-section {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar {
+    background-color: #c92a28;
+    color: aliceblue;
+    margin-bottom: 0;
+  }
+  
+  .middle-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+  }
+  
+  .container-content {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    margin: 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leftSection {
+    flex: 10;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rightSection {
+    flex: 4;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+  }
+  
+  .coveredImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    object-fit: contain; /* Ensures the image scales to fit inside the bounding box */
+  }
+  
+  .coveringCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+  }
+  
+  .coordinatesDisplay {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .coordinatesDisplay h3 {
+    margin-top: 0;
+  }
+  
+  footer {
+    background-color: #cac5c5;
+    color: #000;
+    padding: 15px;
+    text-align: right;
+  }
+  
+  .halves-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+  }
+  
+  .half {
+    width: 48%;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-padding {
+    margin: 0;
+    padding: 10;
+  }
+  
+  

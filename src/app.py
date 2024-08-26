@@ -69,7 +69,7 @@ def view_images():
 
         current_image = session['image_number']
 
-        return render_template("annotate.html", image=images[current_image], project_name = session['project_name'])
+        return render_template("temp.html", image=images[current_image], project_name = session['project_name'])   #TEMP .HTM being used in place of annotate
 
 
 @app.route('/<project_name>/dataset/images/train/<filename>')

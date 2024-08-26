@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>RedEye</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet"  type = "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+
+</head>
+<body>
+  <!-- Top section (Navbar) -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">RedEye</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Resources</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--top content section-->
+
+      <div class="container-fluid no-padding">
+        <h1>Training Image Annotation Portal</h1>
+        <p>Complete image annotation using the interface below. All annotations will be converted into a .txt coordinate file.</p>
+        <h3>Project Name: {{ project_name }} Image: {{ image }}</h3>
+        <hr>
+    
+
+    <!-- Two Halves Section -->
+
+        
+        <div class="container-content">
+            <div class="leftSection">
+              <div class="outsideWrapper">
+                <div class="insideWrapper">
+                    <img class="coveredImage" src="{{ '/' + project_name + '/dataset/images/train/' + image }}">
+                  <canvas class="coveringCanvas"></canvas>
+                </div>
+              </div>
+            </div>
+
+
+        <div class="rightSection">
+            <div class="coordinatesDisplay" id="coordinatesDisplay">
+            <h3>Bounding Box Pixel Coordinates</h3>
+            <p>X1: <span id="x1">0.000000</span></p>
+            <p>Y1: <span id="y1">0.000000</span></p>
+            <p>X2: <span id="x2">0.000000</span></p>
+            <p>Y2: <span id="y2">0.000000</span></p>
+
+            <h3>Normalized Coordinate Format (YOLOv8)</h3>
+            <p>Center X: <span id="centerX">0.000000</span></p>
+            <p>Center Y: <span id="centerY">0.000000</span></p>
+            <p>Normalized Width: <span id="normWidth">0.000000</span></p>
+            <p>Normalized Height: <span id="normHeight">0.000000</span></p>
+            </div>
+            <div class="btn-group" role="group">
+                <form action="/previous-image"  style="display: inline;">
+                <button type="submit">Back</button>
+                </form>
+                <form action="/next-image"  style="display: inline;">
+                <button type="submit">Next</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+  <!-- Bottom section (Footer) -->
+  <footer class="container-fluid">
+    <p>Peter Driscoll - AMTD 2024</p>
+  </footer>
+
+</body>
+</html>
