@@ -44,7 +44,7 @@
       <div class="container-fluid no-padding">
         <h1>Training Image Annotation Portal</h1>
         <p>Complete image annotation using the interface below. All annotations will be converted into a .txt coordinate file.</p>
-        <h3>Project Name: {{ project_name }} Image: {{ image }}</h3>
+        <h3>Project Name: {{ project_name }} Image: {{ image }} / {{ image_count }}</h3>
         <hr>
     
 
@@ -81,7 +81,7 @@
                 <button type="submit">Back</button>
                 </form>
                 <form action="/next-image"  style="display: inline;">
-                <button type="submit">Next</button>
+                <button id = "next_button" type="submit">Next (N)</button>
                 </form>
         </div>
     </div>
@@ -91,6 +91,22 @@
   <footer class="container-fluid">
     <p>Peter Driscoll - AMTD 2024</p>
   </footer>
+
+  <script>
+    // Function to simulate a button click
+    function simulateButtonClick() {
+        document.getElementById('next_button').click();
+    }
+
+    // Add event listener for keydown event
+    document.addEventListener('keydown', function(event) {
+        // Check if the desired key is pressed (e.g., 'Enter' key)
+        if (event.key === 'n') {
+            event.preventDefault();  // Prevent default form submission behavior
+            simulateButtonClick();
+        }
+    });
+</script>
 
 </body>
 </html>

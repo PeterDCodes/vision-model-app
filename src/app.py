@@ -54,6 +54,8 @@ def submit_project():
 
         #set 0 image to display as first image in directory
         session['image_number'] = 0
+        #set annotations array
+        session["annotations"] = {}
 
         #need to add a FileExistsError so two project of the same name cant be submitted
         return redirect("/annotate")
@@ -69,7 +71,9 @@ def view_images():
 
         current_image = session['image_number']
 
-        return render_template("temp.html", image=images[current_image], project_name = session['project_name'])   #TEMP .HTM being used in place of annotate
+        image_count = len(images)
+
+        return render_template("temp.html", image=images[current_image], project_name = session['project_name'], image_count = image_count)   #TEMP .HTM being used in place of annotate
 
 
 @app.route('/<project_name>/dataset/images/train/<filename>')
@@ -83,8 +87,47 @@ def next_image():
      session['image_number'] += 1
      return redirect("/annotate")
 
+
+
+@app.route('/save-annotations', methods=['POST']) #This gets called every time a box is drawn and data is logged to console
+def save_annotations():
+    data = request.json
+    centerX = format(data['centerX'], ".6f")
+    centerY = format(data['centerY'], ".6f")
+    normWidth = format(data['normWidth'], ".6f")
+    normHeight = format(data['normHeight'], ".6f")
+
+    #turn to string format
+    annotation_string = (f'0 {centerX} {centerY} {normWidth} {normHeight}')
+
+    print(annotation_string)
+    
+    session['annotations']['image_number'] = annotation_string
+
+    #make a .txt file named image_number + .txt and save to labels
+
+    txt_file_name = './' + session['project_name'] + '/dataset/labels/train/' + str(session['image_number']) + ".txt"
+    print(txt_file_name)  # Output: "123.txt"
+
+    f = open(txt_file_name, "w")
+    f.write(annotation_string)
+    f.close()
+
+    # Here you can process or save the data as needed
+    return {"status": "success"}, 200
+
+
+
+
+
+
+
+
+
 @app.route('/previous-image')
 def previous_image():
      #moves image to be displayed in annotate up one image in directory
      session['image_number'] += 1
      return redirect("/annotate")
+
+

@@ -62,9 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const normWidth = Math.abs(width) / imgWidth; // Normalize the box's width relative to the image width
         const normHeight = Math.abs(height) / imgHeight; // Normalize the box's height relative to the image height
 
-        const halfWidth = (normWidth / 2);
-        const halfHeight = (normHeight / 2);   //ADDING THIS SO I CAN CALCULATE 1/2 the Value
-
         // Calculate the center coordinates of the box, normalized to the range [0, 1]                  THIS IS CORRECT HERE, I GET CENTER OF BOX X,Y
         const centerX = ((x1 + x2) / 2) / imgWidth; // Calculate and normalize the center X coordinate
         const centerY = ((y1 + y2) / 2) / imgHeight; // Calculate and normalize the center Y coordinate
@@ -72,11 +69,32 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display the YOLOv8 format (centerX, centerY, normWidth, normHeight) with six decimal places in HTML
         document.getElementById('centerX').textContent = centerX.toFixed(6); // Update the displayed center X coordinate
         document.getElementById('centerY').textContent = centerY.toFixed(6); // Update the displayed center Y coordinate
-        document.getElementById('normWidth').textContent = halfWidth.toFixed(6); // Update the displayed normalized width
-        document.getElementById('normHeight').textContent = halfHeight.toFixed(6); // Update the displayed normalized height
+        document.getElementById('normWidth').textContent = normWidth.toFixed(6); // Update the displayed normalized width
+        document.getElementById('normHeight').textContent = normHeight.toFixed(6); // Update the displayed normalized height
 
         // Log the YOLOv8 format values in the console for debugging or verification purposes
-        console.log(`YOLOv8 Format: ${centerX.toFixed(6)} ${centerY.toFixed(6)} ${halfWidth.toFixed(6)} ${halfHeight.toFixed(6)}`); //UPDATING TO BE 1/2 h and w
+        console.log(`YOLOv8 Format: ${centerX.toFixed(6)} ${centerY.toFixed(6)} ${normWidth.toFixed(6)} ${normHeight.toFixed(6)}`); //UPDATING TO BE 1/2 h and w
+
+        // New code to send the halfHeight to the server
+        const halfHeight = normHeight / 2;
+
+        fetch('/save-annotations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                centerX: centerX,
+                centerY: centerY,
+                normWidth: normWidth,
+                normHeight: halfHeight
+            })
+        }).then(response => response.json())
+        .then(data => {
+            console.log('Data sent successfully:', data);
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     // Function to handle the end of drawing (when the mouse is released or moved out of the canvas)
