@@ -3,6 +3,7 @@ from config_files import config_files
 import os
 from video_parse import video_parse
 from image_dir_sort import image_dir_sort
+from create_model import model_train
 
 
 #video parse is an imported function. I need to figure out how I can get vid from user and parse into folders.
@@ -83,11 +84,25 @@ def serve_image(project_name, filename):
 
 @app.route('/next-image')
 def next_image():
+
+    #check if user already completed final annotation
+     if int(session['image_number']) == len(os.listdir(session['image_path'])) - 1: #if the user has reached final annotation, they will then be sent to final screen
+        return redirect("/model-config")
+
+
      #moves image to be displayed in annotate up one image in directory
      session['image_number'] += 1
+
+
      return redirect("/annotate")
 
+@app.route('/previous-image')
+def previous_image():
+     #moves image to be displayed in annotate up one image in directory
+     session['image_number'] += 1
 
+
+     return redirect("/annotate")
 
 @app.route('/save-annotations', methods=['POST']) #This gets called every time a box is drawn and data is logged to console
 def save_annotations():
@@ -107,7 +122,6 @@ def save_annotations():
     #make a .txt file named image_number + .txt and save to labels
 
     txt_file_name = './' + session['project_name'] + '/dataset/labels/train/' + str(session['image_number']) + ".txt"
-    print(txt_file_name)  # Output: "123.txt"
 
     f = open(txt_file_name, "w")
     f.write(annotation_string)
@@ -117,17 +131,28 @@ def save_annotations():
     return {"status": "success"}, 200
 
 
+@app.route('/model-config')#once the user completes all image annotations, this page will show up.
+def model_config():
+     #this is where the yaml file will be created
+    f= open("config.yaml", "w")
 
+    path = (f'{os.getcwd()}/{session['project_name']}/dataset')
 
+    #path = './' + session['project_name'] + '/dataset'
+    train = 'images/train'
+    val = 'images/train'
 
+    f.write(f'\npath: {path}\ntrain: {train}\nval: {val}\n\n#classes\nnames:\n 0: object_name')
+    f.close()
+     #will need to collect the epochs from user
+     #should also use this to complete some sort of validation tests
+    return render_template("model_config.html")
 
+@app.route('/model-create', methods=['POST']) #user creates model from model config page
+def model_create():
+    epochs = request.form.get('epochs')
+    print(epochs)
+    model_train()
 
-
-
-@app.route('/previous-image')
-def previous_image():
-     #moves image to be displayed in annotate up one image in directory
-     session['image_number'] += 1
-     return redirect("/annotate")
-
+    return render_template('success.html')
 

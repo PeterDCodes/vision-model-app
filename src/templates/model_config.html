@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+
+    <div class="col-sm-8 text-left"> 
+      <h1>Model Training Parameters</h1>
+      <p>Enter value for number of epochs used to create AI Vision Model.</p>
+      <hr>
+      <h3>Training Parameters</h3>
+      <div>
+        <form action="/model-create" method="POST" enctype="multipart/form-data">
+            <label for="epochs">Training Cycles (Epochs): </label>
+            <input type="number" id="epochs" name="epochs" min="1" max="5" value="1"><br><br>
+            <input type="submit" value="Start">
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
