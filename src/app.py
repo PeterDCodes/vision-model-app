@@ -89,10 +89,8 @@ def next_image():
      if int(session['image_number']) == len(os.listdir(session['image_path'])) - 1: #if the user has reached final annotation, they will then be sent to final screen
         return redirect("/model-config")
 
-
      #moves image to be displayed in annotate up one image in directory
      session['image_number'] += 1
-
 
      return redirect("/annotate")
 
@@ -142,7 +140,9 @@ def model_config():
     train = 'images/train'
     val = 'images/train'
 
-    f.write(f'\npath: {path}\ntrain: {train}\nval: {val}\n\n#classes\nnames:\n 0: object_name')
+    object_name = session['object_name']
+
+    f.write(f'\npath: {path}\ntrain: {train}\nval: {val}\n\n#classes\nnames:\n 0: {object_name}')
     f.close()
      #will need to collect the epochs from user
      #should also use this to complete some sort of validation tests
