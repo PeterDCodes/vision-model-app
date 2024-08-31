@@ -35,10 +35,11 @@ def video_parse(video_file, save_path, rate):
             filename = str(frame_name)
             save_file = (save_path + "/" + filename + ".jpg") #name of the file
 
-            resized_frame = cv2.resize(frame, (400,300))
+            #resized_frame = cv2.resize(frame, (400,300))
 
-            cv2.imwrite(save_file, resized_frame)
+            cv2.imwrite(save_file, frame)
             frame_name+=1
+            break
    
                 
         else:

@@ -75,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Log the YOLOv8 format values in the console for debugging or verification purposes
         console.log(`YOLOv8 Format: ${centerX.toFixed(6)} ${centerY.toFixed(6)} ${normWidth.toFixed(6)} ${normHeight.toFixed(6)}`); //UPDATING TO BE 1/2 h and w
 
-        // New code to send the halfHeight to the server
-        const halfHeight = normHeight / 2;
 
         fetch('/save-annotations', {
             method: 'POST',
@@ -87,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 centerX: centerX,
                 centerY: centerY,
                 normWidth: normWidth,
-                normHeight: halfHeight
+                normHeight: normHeight
             })
         }).then(response => response.json())
         .then(data => {
