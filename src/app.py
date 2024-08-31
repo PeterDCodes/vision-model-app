@@ -153,5 +153,7 @@ def model_create():
     epochs = int(request.form.get('epochs'))
     model_train(epochs)
 
+    #need to figure out how to put a loading screen while the model is training??????
+
     return render_template('success.html')
 
