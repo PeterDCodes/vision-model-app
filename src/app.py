@@ -3,7 +3,7 @@ from config_files import config_files
 import os
 from video_parse import video_parse
 from image_dir_sort import image_dir_sort
-from create_model import model_train
+from model_train import model_train
 
 
 #video parse is an imported function. I need to figure out how I can get vid from user and parse into folders.
@@ -150,9 +150,8 @@ def model_config():
 
 @app.route('/model-create', methods=['POST']) #user creates model from model config page
 def model_create():
-    epochs = request.form.get('epochs')
-    print(epochs)
-    model_train()
+    epochs = int(request.form.get('epochs'))
+    model_train(epochs)
 
     return render_template('success.html')
 
