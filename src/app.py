@@ -82,6 +82,14 @@ def serve_image(project_name, filename):
     directory = os.path.join('.', project_name, 'dataset', 'images', 'train')
     return send_from_directory(directory, filename)
 
+@app.route('/<project_name>/train/<filename>')
+def serve_results(project_name, filename):
+    directory = os.path.join('.', project_name, 'train')
+    return send_from_directory(directory, filename)
+
+
+
+
 @app.route('/next-image')
 def next_image():
 
