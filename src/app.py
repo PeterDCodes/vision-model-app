@@ -151,9 +151,9 @@ def model_config():
 @app.route('/model-create', methods=['POST']) #user creates model from model config page
 def model_create():
     epochs = int(request.form.get('epochs'))
-    model_train(epochs)
+    model_train(epochs, project_name = session['project_name'])
 
     #need to figure out how to put a loading screen while the model is training??????
 
-    return render_template('success.html')
+    return render_template('success.html', project_name = session['project_name'], object_name = session['object_name'])
 
