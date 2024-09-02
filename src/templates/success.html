@@ -3,23 +3,24 @@
 {% block content %}
   
 <div>
-  <div class="container-fluid">
-    <div class="row content">
-      <div class="col-sm-8 text-left">
-        <h1>Model Training Completed</h1>
-        <p>Results stored in runs directory.</p>
-        <h3>Project Name: {{ project_name }} <br>Object: {{ object_name }}</h3>
-        <hr>
-
-        <!-- Main results photos displayed -->
-        <div class="col-sm-7">
-          <img class="img-responsive" src= "{{project_name + '/train/results.png'}}" alt="results charts">
-          <img class="img-responsive" src= "{{ '/' + project_name + '/train/train_batch0.jpg'}}" alt="example photo">
+    <div class="container-fluid">
+      <h1>Model Training Completed</h1>
+      <p>Results stored in the runs directory.</p>
+      <h3>Project Name: {{ project_name }} <br>Object: {{ object_name }}</h3>
+      <hr>
+  
+      <!-- Main results photos displayed -->
+      <div class="container-content">
+        <div class="leftSection">
+          <img class="img-responsive" src="{{ project_name + '/train/results.png' }}" alt="results charts" style="width:400;height:400px;">
         </div>
-        
+        <div class="rightSection">
+          <img class="img-responsive" src="{{ '/' + project_name + '/train/train_batch0.jpg' }}" alt="example photo" style="width:400px;height:400px;">
+        </div>
       </div>
+      
     </div>
   </div>
-</div>
+  
 
 {% endblock %}
