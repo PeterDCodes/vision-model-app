@@ -46,7 +46,15 @@ def config_files(project_name, object_name):
 
     #make a autodata folder used to store future auto data
     autodata = "./" + main_folder + '/autodata'
-    os.mkdir(autodata)    
+    os.mkdir(autodata)
+
+    #make a sub folders in autodata folder used to store images
+    auto_images = "./" + autodata + '/images'
+    os.mkdir(auto_images)
+
+    #make a sub folders in autodata folder used to store labels
+    auto_labels = "./" + autodata + '/labels'
+    os.mkdir(auto_labels)
 
     #make dataset folder
     dataset = "./" + main_folder + '/dataset'
