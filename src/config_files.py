@@ -31,7 +31,7 @@ from video_parse import video_parse
 
 def config_files(project_name, object_name):
 
-    #can make improvement here using a 'subfolder' function to clean up the following code with a loop/recursive function from a list of these required directories??
+    #can make improvement here using a 'subfolder' function to clean up the following code with a loop function from a list of these required directories??
 
     main_folder = "./" + project_name
     os.mkdir(main_folder)
@@ -43,6 +43,10 @@ def config_files(project_name, object_name):
     #make scripts folder
     scripts = "./" + main_folder + '/scripts'
     os.mkdir(scripts)
+
+    #make a autodata folder used to store future auto data
+    autodata = "./" + main_folder + '/autodata'
+    os.mkdir(autodata)    
 
     #make dataset folder
     dataset = "./" + main_folder + '/dataset'
