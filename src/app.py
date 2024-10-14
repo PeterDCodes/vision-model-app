@@ -142,7 +142,7 @@ def model_config():
      #this is where the yaml file will be created
     f= open("config.yaml", "w")
 
-    path = (f'{os.getcwd()}/{session['project_name']}/dataset')
+    path = (f"{os.getcwd()}/{session['project_name']}/dataset")
 
     #path = './' + session['project_name'] + '/dataset'
     train = 'images/train'
